@@ -63,7 +63,7 @@ BorderColor #8A8A8A
 ' Layout
 ' ##################################
 
-!function LAYOUT_WITH_LEGEND()
+!unquoted function LAYOUT_WITH_LEGEND()
 hide stereotype
 legend right
 |=              |= Type |
