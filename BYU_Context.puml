@@ -63,7 +63,7 @@ BorderColor #8A8A8A
 ' Layout
 ' ##################################
 
-!unquoted function LAYOUT_WITH_LEGEND()
+!function LAYOUT_WITH_LEGEND()
 hide stereotype
 legend right
 |=              |= Type |
@@ -78,17 +78,17 @@ endlegend
 ' ##################################
 
 !unquoted function Person($alias, $label)
-rectangle "==$label" <<person>> as $alias
+actor "==$label" <<person>> as $alias
 !endfunction
 !unquoted function Person($alias, $label, $descr)
-rectangle "==$label\n\n $descr" <<person>> as $alias
+actor "==$label\n\n $descr" <<person>> as $alias
 !endfunction
 
 !unquoted function Person_Ext($alias, $label)
-rectangle "==$label" <<external_person>> as $alias
+Actor "==$label" <<external_person>> as $alias
 !endfunction
 !unquoted function Person_Ext($alias, $label, $descr)
-rectangle "==$label\n\n $descr" <<external_person>> as $alias
+Actor "==$label\n\n $descr" <<external_person>> as $alias
 !endfunction
 
 !unquoted function System($alias, $label)
