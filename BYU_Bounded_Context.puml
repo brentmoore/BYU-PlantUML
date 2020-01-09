@@ -1,0 +1,82 @@
+'!include https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Context.puml
+' uncomment the following line and comment the first to use locally
+!include /opt/ArchDoc/BYU-PlantUML/BYU_Context_Map.puml
+
+' Scope: A single software system.
+' Primary elements: Containers within the software system in scope.
+' Supporting elements: People and software systems directly connected to the containers.
+' Intended audience: Technical people inside and outside of the software development team; including software architects, developers and operations/support staff.
+
+' Colors
+' ##################################
+
+!global $COMPONENT_BG_COLOR = "#438DD5"
+
+' Styling
+' ##################################
+
+skinparam rectangle<<component>> {
+    StereotypeFontColor $ELEMENT_FONT_COLOR
+    FontColor $ELEMENT_FONT_COLOR
+    BackgroundColor $CONTAINER_BG_COLOR
+    BorderColor #3C7FC0
+}
+
+skinparam database<<component>> {
+    StereotypeFontColor $ELEMENT_FONT_COLOR
+    FontColor $ELEMENT_FONT_COLOR
+    BackgroundColor $COMPONENT_BG_COLOR
+    BorderColor #3C7FC0
+}
+
+skinparam queue<<queue>> {
+    StereotypeFontColor $ELEMENT_FONT_COLOR
+    FontColor $ELEMENT_FONT_COLOR
+    BackgroundColor $COMPONENT_BG_COLOR
+    BorderColor #3C7FC0
+}
+
+' Layout
+' ##################################
+
+!function LAYOUT_WITH_LEGEND()
+hide stereotype
+legend right
+|=              |= Type |
+|<$PERSON_BG_COLOR>      | person |
+|<$EXTERNAL_PERSON_BG_COLOR>      | external person |
+|<$SYSTEM_BG_COLOR>   | system |
+|<$EXTERNAL_SYSTEM_BG_COLOR>      | external system |
+|<$CONPONENT_BG_COLOR>   | component |
+endlegend
+!endfunction
+
+' Elements
+' ##################################
+
+!unquoted function Component($alias, $label, $techn)
+rectangle "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//" <<container>> as $alias
+!endfunction
+!unquoted function Component($alias, $label, $techn, $descr)
+rectangle "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//\n\n $descr" <<container>> as $alias
+!endfunction
+
+!unquoted function ComponentDb($alias, $label, $techn)
+database "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//" <<container>> as $alias
+!endfunction
+!unquoted function ComponentDb($alias, $label, $techn, $descr)
+database "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//\n\n $descr" <<container>> as $alias
+!endfunction
+
+!unquoted function Queue($alias, $label, $techn)
+queue "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//" <<queue>> as $alias
+!endfunction
+!unquoted function queue($alias, $label, $techn, $descr)
+queue "==$label\n//<size:$TECHN_FONT_SIZE>[$techn]</size>//\n\n $descr" <<queue>> as $alias
+!endfunction
+' Boundaries
+' ##################################
+
+!unquoted function Context_Boundary($alias, $label)
+!return Boundary($alias, $label, "Context")
+!endfunction

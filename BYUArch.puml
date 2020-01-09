@@ -1,5 +1,8 @@
-' C4-PlantUML, version 1.0.0
-' https://github.com/RicardoNiepel/C4-PlantUML
+' BYU-PlantUML, version 1.0.0
+' Derived from https://github.com/RicardoNiepel/C4-PlantUML
+
+!include <tupadr3/font-awesome-5/user>
+
 
 ' Colors
 ' ##################################
@@ -17,6 +20,11 @@ skinparam wrapWidth 200
 skinparam maxMessageSize 150
 
 skinparam rectangle {
+    StereotypeFontSize 12
+    shadowing false
+}
+
+skinparam actor {
     StereotypeFontSize 12
     shadowing false
 }
@@ -43,18 +51,18 @@ skinparam rectangle<<boundary>> {
 ' Layout
 ' ##################################
 
-!unquoted function LAYOUT_AS_SKETCH()
+!function LAYOUT_AS_SKETCH()
 skinparam backgroundColor #EEEBDC
 skinparam handwritten true
 skinparam defaultFontName "Comic Sans MS"
 center footer <font color=red>Warning:</font> Created for discussion, needs to be validated
 !endfunction
 
-!unquoted function LAYOUT_TOP_DOWN()
+!function LAYOUT_TOP_DOWN()
 top to bottom direction
 !endfunction
 
-!unquoted function LAYOUT_LEFT_RIGHT() 
+!function LAYOUT_LEFT_RIGHT() 
 left to right direction
 !endfunction
 
