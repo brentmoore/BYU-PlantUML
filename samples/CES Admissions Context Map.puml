@@ -1,0 +1,35 @@
+@startuml CES Admissions
+' uncomment the following line and comment the first to use locally
+!include /opt/ArchDoc/BYU-PlantUML/BYU_Context_Map.puml
+
+LAYOUT_WITH_LEGEND()
+'LAYOUT_TOP_DOWN()
+LAYOUT_LEFT_RIGHT()
+
+title <$user>CES Admissions Context Map\n as of %date("yyyy-MM-dd")
+
+Person(officer,"Officer","Admissions Officer")
+Person(applicant,"Applicant","Admissions Applicant")
+Bounded_Context(cesAdmissions,"CES Admissions","CES Admissions System")
+System_Ext(cashnet, "CashNet", "CashNet credit card processing")
+CESSystem_Ext(cesIdentity, "CES Identity", "CES Identity System")
+CESSystem_Ext(cesProfile, "CES Profile", "CES Profile System")
+CESSystem_Ext(cesEndorsement,"Endorsements","CES Endorsement System")
+CESSystem_Ext(decisionProcessing,"Decision Processing","Decision Processing System")
+System_Ext(testScoreProvider,"Test Score Provider","Test Score Provider")
+System_Ext(transcriptProvider,"External Institutions","Transcript Providers")
+
+
+Rel(officer,cesAdmissions,"Monitor Application Status / Configure Application Details")
+Rel(cashnet,cesAdmissions,"Process credit card transactions for")
+Rel(testScoreProvider,cesAdmissions,"Provide test scores to")
+Rel(transcriptProvider,cesAdmissions,"Provide transscripts to")
+
+Rel(cesIdentity,cesAdmissions,"Provide identity and authorization services to")
+Rel(applicant,cesAdmissions,"Apply for admission via")
+Rel(cesAdmissions,applicant,"Provide application status update to","email")
+Rel(cesEndorsement,cesAdmissions,"Provides Endorsement Status to","event")
+Rel(cesProfile,cesAdmissions,"Shares data between applications via")
+Rel(cesAdmissions,decisionProcessing,"Send completed applications to")
+
+@enduml
