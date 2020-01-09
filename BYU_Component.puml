@@ -1,6 +1,6 @@
 '!include https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 ' uncomment the following line and comment the first to use locally
-!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
+!include ./BYU_Bounded_Context.puml
 
 ' Scope: A single container.
 ' Primary elements: Components within the container in scope.

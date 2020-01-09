@@ -1,6 +1,6 @@
 '!includeurl https://raw.githubusercontent.com/brentmoore/BYU-PlantUML/master/BYUArch.puml
 ' uncomment the following line and comment the first to use locally
-!include /opt/ArchDoc/BYU-PlantUML/BYUArch.puml
+!include ./BYUArch.puml
 !include <tupadr3/font-awesome-5/user>
 
 ' Scope: A single software system.
