@@ -1,6 +1,7 @@
 '!includeurl https://raw.githubusercontent.com/brentmoore/BYU-PlantUML/master/BYUArch.puml
 ' uncomment the following line and comment the first to use locally
-!include /opt/ArchDoc/BYU-PlantUML/BYUArch.puml
+!include https://raw.githubusercontent.com/brentmoore/BYU-PlantUML/master/BYUArch.puml
+'!include /opt/ArchDoc/BYU-PlantUML/BYUArch.puml
 !include <tupadr3/font-awesome-5/user>
 
 ' Scope: A single software system.
@@ -12,12 +13,22 @@
 ' ##################################
 
 !global $PERSON_BG_COLOR = "#08427B"
-!global $EXTERNAL_PERSON_BG_COLOR = "#686868"
 !global $SYSTEM_BG_COLOR = "#1168BD"
 !global $EXTERNAL_SYSTEM_BG_COLOR = "#999999"
+!global $BOUNDED_CONTEXT_BG_COLOR = "#191970"
+!global $CES_SYSTEM_BG_COLOR = "#708090"
+!global $BYU_SYSTEM_BG_COLOR = "#4169E1"
+!global $EXTERNAL_ENTITY_BG_COLOR = "#2F4F4F"
 
 ' Styling
 ' ##################################
+
+skinparam rectangle<<bounded context>> {
+StereotypeFontColor $ELEMENT_FONT_COLOR
+FontColor $ELEMENT_FONT_COLOR
+BackgroundColor $BOUNDED_CONTEXT_BG_COLOR
+BorderColor #073B6F
+}
 
 skinparam rectangle<<person>> {
 StereotypeFontColor $ELEMENT_FONT_COLOR
@@ -26,12 +37,6 @@ BackgroundColor $PERSON_BG_COLOR
 BorderColor #073B6F
 }
 
-skinparam rectangle<<external_person>> {
-StereotypeFontColor $ELEMENT_FONT_COLOR
-FontColor $ELEMENT_FONT_COLOR
-BackgroundColor $EXTERNAL_PERSON_BG_COLOR
-BorderColor #8A8A8A
-}
 
 skinparam rectangle<<system>> {
 StereotypeFontColor $ELEMENT_FONT_COLOR
@@ -40,17 +45,24 @@ BackgroundColor $SYSTEM_BG_COLOR
 BorderColor #3C7FC0
 }
 
-skinparam rectangle<<external_system>> {
+skinparam rectangle<<external system>> {
 StereotypeFontColor $ELEMENT_FONT_COLOR
 FontColor $ELEMENT_FONT_COLOR
 BackgroundColor $EXTERNAL_SYSTEM_BG_COLOR
 BorderColor #8A8A8A
 }
 
-skinparam rectangle<<ces_system>> {
+skinparam rectangle<<byu system>> {
 StereotypeFontColor $ELEMENT_FONT_COLOR
 FontColor $ELEMENT_FONT_COLOR
-BackgroundColor $EXTERNAL_SYSTEM_BG_COLOR
+BackgroundColor $BYU_SYSTEM_BG_COLOR
+BorderColor #8A8A8A
+}
+
+skinparam rectangle<<ces system>> {
+StereotypeFontColor $ELEMENT_FONT_COLOR
+FontColor $ELEMENT_FONT_COLOR
+BackgroundColor $CES_SYSTEM_BG_COLOR
 BorderColor #8A8A8A
 }
 
@@ -61,10 +73,17 @@ BackgroundColor $SYSTEM_BG_COLOR
 BorderColor #3C7FC0
 }
 
-skinparam database<<external_system>> {
+skinparam database<<external system>> {
 StereotypeFontColor $ELEMENT_FONT_COLOR
 FontColor $ELEMENT_FONT_COLOR
 BackgroundColor $EXTERNAL_SYSTEM_BG_COLOR
+BorderColor #8A8A8A
+}
+
+skinparam storage<<external entity>> {
+StereotypeFontColor $ELEMENT_FONT_COLOR
+FontColor $ELEMENT_FONT_COLOR
+BackgroundColor $EXTERNAL_ENTITY_BG_COLOR
 BorderColor #8A8A8A
 }
 
@@ -75,10 +94,12 @@ BorderColor #8A8A8A
 hide stereotype
 legend right
 |=              |= Type |
-|<$PERSON_BG_COLOR>      | person |
-|<$EXTERNAL_PERSON_BG_COLOR>      | external person |
-|<$SYSTEM_BG_COLOR>   | system |
-|<$EXTERNAL_SYSTEM_BG_COLOR>      | external system |
+|<$PERSON_BG_COLOR>      | Person |
+|<$BOUNDED_CONTEXT_BG_COLOR>   | Bounded Context of Interest |
+|<$CES_SYSTEM_BG_COLOR>     | CES System |
+|<$BYU_SYSTEM_BG_COLOR>     | BYU System |
+|<$EXTERNAL_SYSTEM_BG_COLOR>   | External System |
+|<$EXTERNAL_ENTITY_BG_COLOR>   | External Entity |
 endlegend
 !endfunction
 
@@ -92,13 +113,6 @@ rectangle "==$label\n<$user>"  <<person>> as $alias
 rectangle "==$label\n<$user>\n $descr" <<person>> as $alias
 !endfunction
 
-!unquoted function Person_Ext($alias, $label)
-rectangle "==$label" <<external_person>> as $alias
-!endfunction
-!unquoted function Person_Ext($alias, $label, $descr)
-rectangle "==$label\n\n $descr" <<external_person>> as $alias
-!endfunction
-
 !unquoted function Bounded_Context($alias, $label)
 rectangle "==$label" <<bounded context>> as $alias
 !endfunction
@@ -107,17 +121,31 @@ rectangle "==$label\n\n $descr" <<bounded context>> as $alias
 !endfunction
 
 !unquoted function System_Ext($alias, $label)
-rectangle "==$label" <<external_system>> as $alias
+rectangle "==$label" <<external system>> as $alias
 !endfunction
 !unquoted function System_Ext($alias, $label, $descr)
-rectangle "==$label\n\n $descr" <<external_system>> as $alias
+rectangle "==$label\n\n $descr" <<external system>> as $alias
 !endfunction
 
-!unquoted function CESSystem_Ext($alias, $label)
-rectangle "==$label" <<ces_system>> as $alias
+!unquoted function CESSystem($alias, $label)
+rectangle "==$label" <<ces system>> as $alias
 !endfunction
-!unquoted function CESSystem_Ext($alias, $label, $descr)
-rectangle "==$label\n\n $descr" <<ces_system>> as $alias
+!unquoted function CESSystem($alias, $label, $descr)
+rectangle "==$label\n\n $descr" <<ces system>> as $alias
+!endfunction
+
+!unquoted function BYUSystem($alias, $label)
+rectangle "==$label" <<byu system>> as $alias
+!endfunction
+!unquoted function BYUSystem($alias, $label, $descr)
+rectangle "==$label\n\n $descr" <<byu system>> as $alias
+!endfunction
+
+!unquoted function External_Entity($alias, $label)
+storage "==$label" <<external entity>> as $alias
+!endfunction
+!unquoted function External_Entity($alias, $label, $descr)
+storage "==$label\n\n $descr" <<external entity>> as $alias
 !endfunction
 
 !unquoted function SystemDb($alias, $label)
@@ -128,10 +156,10 @@ database "==$label\n\n $descr" <<system>> as $alias
 !endfunction
 
 !unquoted function SystemDb_Ext($alias, $label)
-database "==$label" <<external_system>> as $alias
+database "==$label" <<external system>> as $alias
 !endfunction
 !unquoted function SystemDb_ext($alias, $label, $descr)
-database "==$label\n\n $descr" <<external_system>> as $alias
+database "==$label\n\n $descr" <<external system>> as $alias
 !endfunction
 
 ' Boundaries

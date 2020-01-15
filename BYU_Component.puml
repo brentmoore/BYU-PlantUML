@@ -1,7 +1,7 @@
 '!include https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
 ' uncomment the following line and comment the first to use locally
-!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
-
+'!include /opt/ArchDoc/BYU-PlantUML/BYU_Bounded_Context.puml
+!include https://raw.githubusercontent.com/brentmoore/BYU-PlantUML/master/BYU_Bounded_Context.puml
 ' Scope: A single container.
 ' Primary elements: Components within the container in scope.
 ' Supporting elements: Containers (within the software system in scope) plus people and software systems directly connected to the components.
